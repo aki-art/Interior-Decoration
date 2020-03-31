@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{07BE273B-DFE3-4597-A3A5-DF571E1A1563}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>InteriorDecoration</RootNamespace>
+    <AssemblyName>Interior Decoration</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>..\..\lib\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\..\lib\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>..\..\lib\Assembly-CSharp-firstpass.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Unity.TextMeshPro, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\lib\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AssetBundleModule">
+      <HintPath>..\..\lib\UnityEngine.AssetBundleModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\..\lib\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>..\..\lib\UnityEngine.ImageConversionModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\..\lib\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UIModule">
+      <HintPath>..\..\lib\UnityEngine.UIModule.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Buildings\FossilDisplay\Assemblable.cs" />
+    <Compile Include="Buildings\FossilDisplay\FossilStand.cs" />
+    <Compile Include="Buildings\FossilDisplay\FossilStandConfig.cs" />
+    <Compile Include="Buildings\FossilDisplay\FossilStandPatches.cs" />
+    <Compile Include="Buildings\GlassSculpture\Fabulousness.cs" />
+    <Compile Include="Buildings\GlassSculpture\GlassSculptureConfig.cs" />
+    <Compile Include="Buildings\GlassSculpture\GlassSculpturePatches.cs" />
+    <Compile Include="Buildings\Lantern\Lantern.cs" />
+    <Compile Include="Buildings\Lantern\LanternConfig.cs" />
+    <Compile Include="Buildings\StainedGlassTiles\BluePrintsCompatibility.cs" />
+    <Compile Include="Buildings\StainedGlassTiles\CopperStainedGlassTilesConfig.cs" />
+    <Compile Include="Buildings\StainedGlassTiles\GlassTilePatches.cs" />
+    <Compile Include="Buildings\StainedGlassTiles\GoldStainedGlassTilesConfig.cs" />
+    <Compile Include="Buildings\StainedGlassTiles\GraniteStainedGlassTilesConfig.cs" />
+    <Compile Include="Buildings\StainedGlassTiles\InsulationStainedGlassTilesConfig.cs" />
+    <Compile Include="Buildings\StainedGlassTiles\IronStainedGlassTilesConfig.cs" />
+    <Compile Include="Buildings\StainedGlassTiles\LeadStainedGlassTilesConfig.cs" />
+    <Compile Include="Buildings\StainedGlassTiles\MaficRockStainedGlassTilesConfig.cs" />
+    <Compile Include="Buildings\StainedGlassTiles\RegolithStainedGlassTiles.cs" />
+    <Compile Include="Buildings\StainedGlassTiles\SaltStainedGlassTilesConfig.cs" />
+    <Compile Include="Buildings\StainedGlassTiles\SandstoneStainedGlassTilesConfig.cs" />
+    <Compile Include="Buildings\StainedGlassTiles\SedimentaryRockStainedGlassTilesConfig.cs" />
+    <Compile Include="Buildings\StainedGlassTiles\SlimeMoldStainedGlassTilesConfig.cs" />
+    <Compile Include="Buildings\StainedGlassTiles\StainedGlassTileConfig.cs" />
+    <Compile Include="Buildings\StainedGlassTiles\SteelStainedGlassConfig.cs" />
+    <Compile Include="Buildings\StainedGlassTiles\TileHelper.cs" />
+    <Compile Include="BuildingUtil.cs" />
+    <Compile Include="Buildings\FossilDisplay\InspiredEffects.cs" />
+    <Compile Include="FUI\FButton.cs" />
+    <Compile Include="FUI\FCycle.cs" />
+    <Compile Include="FUI\FSlider.cs" />
+    <Compile Include="FUI\FSpeedSlider.cs" />
+    <Compile Include="FUI\FToggle.cs" />
+    <Compile Include="FUI\UIHelper.cs" />
+    <Compile Include="FUI\UIPatches.cs" />
+    <Compile Include="FUI\UISoundsHelper.cs" />
+    <Compile Include="InteriorDecorStrings.cs" />
+    <Compile Include="Log.cs" />
+    <Compile Include="Mod.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="HarmonyPatches.cs" />
+    <Compile Include="Settings\Manager.cs" />
+    <Compile Include="Settings\ModSettingsScreen.cs" />
+    <Compile Include="Settings\UserSettings.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Buildings\Aquarium\" />
+    <Folder Include="Buildings\Chandelier\" />
+    <Folder Include="Buildings\Fountain\" />
+    <Folder Include="Buildings\GlassDoor\" />
+    <Folder Include="Buildings\MoodLamp\" />
+    <Folder Include="Buildings\StarStickers\" />
+    <Folder Include="Buildings\Terrarium\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>start xcopy /y /d "$(ProjectDir)$(OutDir)Interior Decoration.dll" "C:\Users\Aki\Documents\Klei\OxygenNotIncluded\mods\dev\InteriorDecoration_dev"</PostBuildEvent>
+  </PropertyGroup>
+</Project>
