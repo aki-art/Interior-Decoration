@@ -6,7 +6,7 @@ namespace InteriorDecoration.Buildings.StainedGlassTiles
     public class IronStainedGlassTileConfig : IBuildingConfig
     {
         public static readonly int BlockTileConnectorID = Hash.SDBMLower("tiles_glass_tops");
-        public const string ID = "IronStainedGlassTile";
+        public const string ID = Mod.MOD_PREFIX + "IronStainedGlassTile";
 
         public override BuildingDef CreateBuildingDef()
         {

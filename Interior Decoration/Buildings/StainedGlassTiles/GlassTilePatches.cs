@@ -71,15 +71,14 @@ namespace InteriorDecoration.Buildings.StainedGlassTiles
                         break;
                     }
                 }
-                if (def.name.Contains("StainedGlassTile"))
+                if (def.name.Contains(Mod.TILE_POSTFIX))
                 {
                     ProductInfoScreen productInfoScreen = Traverse.Create(__instance).Field("productInfoScreen").GetValue<ProductInfoScreen>();
                     IList<Tag> elements = productInfoScreen.materialSelectionPanel.GetSelectedElementAsList;
-                    BuildingDef newDef = Assets.GetBuildingDef(elements[0].ToString() + "StainedGlassTile");
-                    if (newDef == null) newDef = Assets.GetBuildingDef("DefaultStainedGlassTile");
+                    string newID = Mod.MOD_PREFIX + elements[0].ToString() + Mod.TILE_POSTFIX;
+                    BuildingDef newDef = Assets.GetBuildingDef(newID);
 
-                    Log.Debuglog("trying to switch  out " + def.name + " to " + elements[0].ToString() + "StainedGlassTile");
-
+                    if (newDef == null) newDef = Assets.GetBuildingDef(StainedGlassTileConfig.ID);
 
                     InterfaceTool tool = PlayerController.Instance.ActiveTool;
 
@@ -112,7 +111,7 @@ namespace InteriorDecoration.Buildings.StainedGlassTiles
                     Building building = SelectTool.Instance.selected.GetComponent<Building>();
 
                     // if it's a stained glass tile but not the default one
-                    if (building != null && building.Def.name.Contains("StainedGlassTile") && building.Def.name != "DefaultStainedGlassTile")
+                    if (building != null && building.Def.name.Contains(Mod.TILE_POSTFIX) && building.Def.name != StainedGlassTileConfig.ID)
                     {
                         var buildingDefault = UnityEngine.Object.Instantiate(building);
                         buildingDefault.Def = Assets.GetBuildingDef(StainedGlassTileConfig.ID);
@@ -134,3 +133,51 @@ namespace InteriorDecoration.Buildings.StainedGlassTiles
 
     }
 }
+
+/*
+ *         /*    public class RendererPatch
+            {
+                [HarmonyPatch(typeof(Rendering.BlockTileRenderer), "AddBlock")]
+                public static class Rendering_BlockTileRenderer_AddBlock_Patch
+                {
+                    public static void Prefix(ref BuildingDef def, SimHashes element)
+                    {
+                        if (def.name == StainedGlassTileConfig.ID)
+                        {
+                            if (StainedGlassVariants.defs.TryGetValue(element, out BuildingDef newDef))
+                            {
+                                Debug.Log($"Replacing {def.name} with {newDef.name}");
+                                def = newDef;
+                            }
+                        }
+                    }
+                }
+
+                [HarmonyPatch(typeof(GeneratedBuildings), "LoadGeneratedBuildings")]
+                public static class GeneratedBuildings_LoadGeneratedBuildings_Patch
+                {
+                    public static void Postfix()
+                    {
+                        StainedGlassVariants.InitDefs();
+                    }
+                }
+
+                // Adding tag for materials i want stained glass to use for building materials
+                [HarmonyPatch(typeof(ElementLoader), "Load")]
+                private static class Patch_ElementLoader_Load
+                {
+
+                    private static void Postfix()
+                    {
+                        Tag stainedGlassMaterial = TagManager.Create("StainedGlassMaterial", "Glass dye");
+
+                        // Adds tag on top of existing tags, does not touch others
+                        foreach (SimHashes elementhash in StainedGlassVariants.tileOverrides)
+                        {
+                            var element = ElementLoader.FindElementByHash(elementhash);
+                            Array.Resize(ref element.oreTags, element.oreTags.Length + 1);
+                            element.oreTags[element.oreTags.GetUpperBound(0)] = stainedGlassMaterial;
+                        }
+                    }
+                }
+            }*/

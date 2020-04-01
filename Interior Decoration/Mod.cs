@@ -13,6 +13,7 @@ namespace InteriorDecoration
     {
         public static string ModPath;
         public const string MOD_PREFIX = "Interior_Decoration_";
+        public const string TILE_POSTFIX = "StainedGlassTile";
 
         public static UserSettings Settings { get; set; }
 
@@ -39,10 +40,7 @@ namespace InteriorDecoration
                 // Terrarium options 
                 ["Roller Snakes"] = new CompMod("RollerSnake.SteelRollerSnakeConfig, RollerSnakeMerged"),
                 ["I Love Slicksters - Morphs !"] = new CompMod("ILoveSlicksters.OwO_EffectPatch, ILoveSlicksters"),
-                ["Fervine"] = new CompMod("Fervine.FervinePatches, Fervine-merged"),
-
-                // Allow for stained glass tiles to be copied into blueprints, despite technically not being a buildable item 
-                ["Blueprints"] = new CompMod("looksomething, upforit")
+                ["Fervine"] = new CompMod("Fervine.FervinePatches, Fervine-merged")
             };
 
             //List<string> detectedMods = compatibleMods.ToList().FindAll(m => Type.GetType(m.Value.MethodToCheck, false, false) != null).Select(m => m.Key).ToList();

@@ -42,6 +42,7 @@ namespace InteriorDecoration.Buildings.StainedGlassTiles
             def.BlockTileIsTransparent = true;
             def.ConstructionOffsetFilter = BuildingDef.ConstructionOffsetFilter_OneDown;
             def.DragBuild = true;
+            def.ShowInBuildMenu = true; // Does not actually show up because it has no category to show up in. However, this makes the mod Blueprints think it is buildable, tricking it into allowing to blueprint these tiles
 
             def.BlockTileMaterial = Assets.GetMaterial("tiles_solid");
 

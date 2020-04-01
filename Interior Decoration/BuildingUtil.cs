@@ -87,12 +87,14 @@ namespace InteriorDecoration
     [AttributeUsage(AttributeTargets.Class)]
     public class BuildMenuAttribute : Attribute
     {
-        public BuildMenuAttribute(string menu)
+        public BuildMenuAttribute(string menu, bool hidden = false)
         {
             Menu = menu;
+            Hidden = hidden;
         }
 
         public string Menu { get; }
+        public bool Hidden { get; }
     }
 
     [AttributeUsage(AttributeTargets.Class)]

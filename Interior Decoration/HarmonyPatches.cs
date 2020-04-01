@@ -26,7 +26,7 @@ namespace InteriorDecoration
 
         public static class Mod_PostLoad
         {
-            public static void PostLoad()
+            public static void PostPatch()
             {
                 Log.Info("Postload");
                 //Mod.SetUpModCompatibility();

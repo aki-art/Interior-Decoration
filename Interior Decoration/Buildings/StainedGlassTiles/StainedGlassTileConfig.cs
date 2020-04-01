@@ -13,7 +13,7 @@ namespace InteriorDecoration.Buildings.StainedGlassTiles
     class StainedGlassTileConfig : IBuildingConfig
     {
         public static readonly int BlockTileConnectorID = Hash.SDBMLower("tiles_glass_tops");
-        public const string ID = "DefaultStainedGlassTile";
+        public const string ID = Mod.MOD_PREFIX + "DefaultStainedGlassTile";
 
         private const string LOCALPATH = "assets/tiles";
         private const string mat = "default";
