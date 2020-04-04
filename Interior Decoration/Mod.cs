@@ -97,7 +97,7 @@ namespace InteriorDecoration
         {
             Texture2D tex = null;
             string texFile = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), path, name) + ".png";
-            Log.Debuglog("Loading image at: " + texFile);
+            //Log.Debuglog("Loading image at: " + texFile);
 
             if (File.Exists(texFile))
             {
@@ -105,8 +105,8 @@ namespace InteriorDecoration
                 tex = new Texture2D(width, height);
                 tex.LoadImage(data);
             }
-            else
-                Debug.LogWarning($"Glass Sculptures Mod: Could not load texture at path {texFile}.");
+            //else
+                //Debug.LogWarning($"Glass Sculptures Mod: Could not load texture at path {texFile}.");
 
             return tex;
         }

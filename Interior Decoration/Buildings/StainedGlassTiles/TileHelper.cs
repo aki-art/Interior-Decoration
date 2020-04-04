@@ -18,7 +18,7 @@ namespace InteriorDecoration.Buildings.StainedGlassTiles
               hitpoints: 100,
               construction_time: 30f,
               construction_mass: new float[] { 50f, 50f },
-              construction_materials: new string[] { "BuildableRaw", "Glass" },
+              construction_materials: new string[] { "StainedGlassMaterial", "Glass" },
               melting_point: 1600f,
               build_location_rule: BuildLocationRule.Tile,
               decor: new EffectorValues(20, 1),

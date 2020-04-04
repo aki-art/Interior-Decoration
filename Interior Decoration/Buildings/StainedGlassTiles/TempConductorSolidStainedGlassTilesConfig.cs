@@ -3,14 +3,14 @@
 namespace InteriorDecoration.Buildings.StainedGlassTiles
 {
     [StringsPath(typeof(InteriorDecorStrings.BUILDINGS.PREFABS.STAINED_GLASS_TILE))]
-    public class SteelStainedGlassTileConfig : IBuildingConfig
+    public class TempConductorSolidStainedGlassTileConfig : IBuildingConfig
     {
         public static readonly int BlockTileConnectorID = Hash.SDBMLower("tiles_glass_tops");
-        public const string ID = Mod.MOD_PREFIX + "SteelStainedGlassTile";
+        public const string ID = Mod.MOD_PREFIX + "TempConductorSolidStainedGlassTile";
 
         public override BuildingDef CreateBuildingDef()
         {
-            return TileHelper.CreateTileBuildingDef(ID, "Steel");
+            return TileHelper.CreateTileBuildingDef(ID, "TempConductorSolid");
         }
 
         public override void ConfigureBuildingTemplate(GameObject go, Tag prefab_tag)

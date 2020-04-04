@@ -3,14 +3,15 @@
 namespace InteriorDecoration.Buildings.StainedGlassTiles
 {
     [StringsPath(typeof(InteriorDecorStrings.BUILDINGS.PREFABS.STAINED_GLASS_TILE))]
-    public class SteelStainedGlassTileConfig : IBuildingConfig
+    [BuildMenu("Base")]
+    public class CarbonStainedGlassTileConfig : IBuildingConfig
     {
         public static readonly int BlockTileConnectorID = Hash.SDBMLower("tiles_glass_tops");
-        public const string ID = Mod.MOD_PREFIX + "SteelStainedGlassTile";
+        public const string ID = Mod.MOD_PREFIX + "CarbonStainedGlassTile";
 
         public override BuildingDef CreateBuildingDef()
         {
-            return TileHelper.CreateTileBuildingDef(ID, "Steel");
+            return TileHelper.CreateTileBuildingDef(ID, "Carbon");
         }
 
         public override void ConfigureBuildingTemplate(GameObject go, Tag prefab_tag)
@@ -22,8 +23,6 @@ namespace InteriorDecoration.Buildings.StainedGlassTiles
         {
             GeneratedBuildings.RemoveLoopingSounds(go);
             go.GetComponent<KPrefabID>().AddTag(GameTags.FloorTiles, false);
-            go.GetComponent<KPrefabID>().AddTag(TagManager.Create("Colorshifting"), false);
-            go.AddComponent<TileUpdater>();
         }
 
         public override void DoPostConfigureUnderConstruction(GameObject go)
@@ -31,7 +30,6 @@ namespace InteriorDecoration.Buildings.StainedGlassTiles
             base.DoPostConfigureUnderConstruction(go);
             go.AddOrGet<KAnimGridTileVisualizer>();
         }
-
 
     }
 }

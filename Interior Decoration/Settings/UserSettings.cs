@@ -22,6 +22,8 @@ namespace InteriorDecoration.Settings
         public bool BiscuitLiquid { get; set; } = false;
         [JsonProperty]
         public bool UseSafeFolder { get; set; } = true;
+        [JsonProperty]
+        public bool DisableVisualFX { get; set; } = false;
 
         public enum PacuLifeCycle
         {

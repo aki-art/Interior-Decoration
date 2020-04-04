@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
+//🌈✨ Aki the Fabulous 🦄🌈
 
 namespace InteriorDecoration.Buildings.GlassSculpture
 {
@@ -21,7 +22,14 @@ namespace InteriorDecoration.Buildings.GlassSculpture
         const float duration = 0.75f;
         float elapsedTime = 0f;
 
-
+        public void ForceToFront()
+        {
+            effect.SetLayer((int)Grid.SceneLayer.BuildingFront);
+            effect.SetSceneLayer(Grid.SceneLayer.BuildingFront);/*
+            var pos = effect.transform.localPosition;
+            pos.z = -0.5f;
+            effect.transform.SetLocalPosition(pos);*/
+        }
 
         protected override void OnPrefabInit()
         {
@@ -36,17 +44,15 @@ namespace InteriorDecoration.Buildings.GlassSculpture
         public void Activate()
         {
             //this.link = new KAnimLink(building_controller, meter_controller); 
-            effect = FXHelpers.CreateEffect("fab_fx_kanim", kBatchedAnimController.transform.GetPosition(), kBatchedAnimController.transform, false, Grid.SceneLayer.Front, false);
+            effect = FXHelpers.CreateEffect("fab_fx_kanim", kBatchedAnimController.transform.GetPosition(), kBatchedAnimController.transform);
             effect.destroyOnAnimComplete = false;
             effect.randomiseLoopedOffset = true;
-            if(kBatchedAnimController.FlipX)
-            {
-                effect.FlipX = true;
-                effect.transform.SetLocalPosition(new Vector3(-0.5f, 0, 1f));
-            }
-            else
-                effect.transform.SetLocalPosition(new Vector3(0.5f, 0, 1f));
-            effect.Play("effect", KAnim.PlayMode.Loop, 0.4f, UnityEngine.Random.Range(0.0f, 1.0f));
+            effect.FlipX = kBatchedAnimController.FlipX;
+
+            var pos = new Vector3(effect.FlipX ? -0.5f : 0.5f, 0, -1f);
+            effect.transform.SetLocalPosition(pos);
+            ForceToFront();
+            effect.Play("effect", KAnim.PlayMode.Paused, 1f);
 
 
             StartCoroutine(ShiftColors());
@@ -54,6 +60,23 @@ namespace InteriorDecoration.Buildings.GlassSculpture
             sparkleFx = Util.KInstantiate(EffectPrefabs.Instance.SparkleStreakFX, kBatchedAnimController.transform.GetPosition() + new Vector3(1f, 0.5f, 0.4f));
             sparkleFx.transform.SetParent(kBatchedAnimController.transform);
             sparkleFx.SetActive(true);
+        }
+
+        private KBatchedAnimController AddEffect()
+        {
+            var id = "FabulousFx";
+
+            GameObject template = EntityTemplates.CreateEntity(id, id, false);
+
+            KBatchedAnimController controller = template.AddOrGet<KBatchedAnimController>();
+            controller.materialType = KAnimBatchGroup.MaterialType.Simple;
+            controller.initialAnim = "";
+            controller.initialMode = KAnim.PlayMode.Paused;
+            controller.isMovable = true;
+            controller.destroyOnAnimComplete = false;
+            controller.AnimFiles = new KAnimFile[] { Assets.GetAnim("fab_fx_kanim") };
+
+            return controller;
         }
 
 

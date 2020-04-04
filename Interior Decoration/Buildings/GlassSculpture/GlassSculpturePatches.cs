@@ -44,14 +44,17 @@ namespace InteriorDecoration.Buildings.GlassSculpture
                         {
                             if(artable.CurrentStage == unicornStageName)
                             {
-                                if (__instance.GetComponent<Fabulousness>() == null)
-                                    __instance.gameObject.AddComponent<Fabulousness>();
-                                else
+                                var fab = __instance.GetComponent<Fabulousness>();
+                                if (fab == null)
+                                    fab = __instance.gameObject.AddComponent<Fabulousness>();
+
+                                fab.ForceToFront();
+/*                                else
                                 {
                                     var fab = __instance.GetComponent<Fabulousness>();
                                     fab.Deactivate();
                                     fab.Activate();
-                                }
+                                }*/
                             }
                         }
                     }

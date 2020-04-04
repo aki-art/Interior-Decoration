@@ -1,17 +1,39 @@
 ﻿using Harmony;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 
 namespace InteriorDecoration.Buildings.StainedGlassTiles
 {
     class GlassTilePatches
     {
-        /// <summary>
-        /// Adding tag for materials i want stained glass to use for building materials
-        /// </summary>
+        const float blueLow = .477f;
+        const float blueHigh = .694f;
+        [HarmonyPatch(typeof(Rendering.BlockTileRenderer))]
+        [HarmonyPatch("GetCellColour")]
+        public static class BlockTileRenderer_GetCellColour_Patch
+        {
+            public static void Postfix(int cell, SimHashes element, ref Color __result)
+            {
+                var building = Grid.Objects[cell, (int)ObjectLayer.FoundationTile];
+                if(building != null)
+                {
+                    if(building.HasTag("Colorshifting"))
+                    {
+                        Vector2I buildingPos = Grid.CellToXY(cell);
+                        float x = (Camera.main.transform.GetPosition().x + buildingPos.x) / 50f;
+                        float y = (Camera.main.transform.GetPosition().y + buildingPos.y) / 50f;
+                        float hue = (x + y) % 1;
+                        //float hue = Mathf.Lerp(blueLow, blueHigh, r);
+                        float sat = element == SimHashes.Diamond ? .1f : .8f;
+
+                        __result = Color.HSVToRGB(hue, sat, 1f);
+                    }
+                }
+            }
+        }
+
+        // Adding tag for materials i want stained glass to use for building materials
         [HarmonyPatch(typeof(ElementLoader), "Load")]
         private static class Patch_ElementLoader_Load
         {
@@ -21,26 +43,30 @@ namespace InteriorDecoration.Buildings.StainedGlassTiles
                 Tag stainedGlassMaterial = TagManager.Create("StainedGlassMaterial", "Glass dye");
                 List<SimHashes> elementsToTag = new List<SimHashes>
                 {
+                    SimHashes.Algae,
                     //SimHashes.Bitumen,
+                    SimHashes.Carbon,
                     SimHashes.Ceramic,
                     SimHashes.Copper,
-                    //SimHashes.Diamond,
+                    SimHashes.Diamond,
                     //SimHashes.Fossil,
                     SimHashes.Gold,
                     SimHashes.Granite,
                     //SimHashes.Ice,
+                    SimHashes.IgneousRock,
                     SimHashes.Iron,
                     SimHashes.Lead,
-                    //SimHashes.Obsidian,
+                    SimHashes.Obsidian,
                     SimHashes.Regolith,
+                    SimHashes.Rust,
                     SimHashes.Salt,
                     SimHashes.SedimentaryRock,
                     SimHashes.SlimeMold,
                     SimHashes.SandStone,
                     SimHashes.Steel,
                     //SimHashes.Sulfur,
-                    SimHashes.SuperInsulator
-                    //SimHashes.TempConductorSolid
+                    //SimHashes.SuperInsulator
+                    SimHashes.TempConductorSolid
                 };
 
                 // Adds tag on top of existing tags, does not touch others
@@ -97,16 +123,14 @@ namespace InteriorDecoration.Buildings.StainedGlassTiles
             }
         }
 
-        /// <summary>
-        /// Makes the Copy Building button target default stained glass in the build menu.
-        /// </summary>
+        // Makes the Copy Building button target default stained glass in the build menu.
         [HarmonyPatch(typeof(PlanScreen), "OnClickCopyBuilding")]
         public static class PlanScreen_OnClickCopyBuilding_Patch
         {
-            public static void Prefix(PlanScreen __instance)
+            public static void Prefix()
             {
                 KSelectable selectable = SelectTool.Instance.selected;
-                if (!(selectable == null))
+                if (selectable != null)
                 {
                     Building building = SelectTool.Instance.selected.GetComponent<Building>();
 
