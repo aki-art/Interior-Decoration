@@ -20,16 +20,6 @@ namespace InteriorDecoration
 
                 Settings.SettingsManager.Initialize();
                 Mod.LoadAll();
-
-            }
-        }
-
-        public static class Mod_PostLoad
-        {
-            public static void PostPatch()
-            {
-                Log.Info("Postload");
-                //Mod.SetUpModCompatibility();
             }
         }
 

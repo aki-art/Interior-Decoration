@@ -25,7 +25,7 @@ namespace InteriorDecoration.Buildings.StainedGlassTiles
                         float y = (Camera.main.transform.GetPosition().y + buildingPos.y) / 50f;
                         float hue = (x + y) % 1;
                         //float hue = Mathf.Lerp(blueLow, blueHigh, r);
-                        float sat = element == SimHashes.Diamond ? .1f : .8f;
+                        float sat = element == SimHashes.Diamond ? .25f : .8f;
 
                         __result = Color.HSVToRGB(hue, sat, 1f);
                     }

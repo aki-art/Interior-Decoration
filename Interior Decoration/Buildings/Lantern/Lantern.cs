@@ -5,12 +5,12 @@ namespace InteriorDecoration.Buildings.Lantern
 {
     class Lantern : StateMachineComponent<Lantern.StatesInstance>
     {
+#pragma warning disable 649
         [MyCmpReq]
         private Operational operational;
         [MyCmpReq]
         private ElementConverter elementConverter;
-        [MyCmpReq]
-        private Storage storage;
+#pragma warning restore 649
 
         private static readonly Operational.Flag requiresFuelFlag = new Operational.Flag("hasFuel", Operational.Flag.Type.Requirement);
 
@@ -30,7 +30,10 @@ namespace InteriorDecoration.Buildings.Lantern
             {
                 ElementConverter elementConverter = ((GenericInstance)obj).master.elementConverter;
                 string elementName = elementConverter.consumedElements[0].tag.ProperName();
-                string formattedMass = GameUtil.GetFormattedMass(elementConverter.consumedElements[0].massConsumptionRate, GameUtil.TimeSlice.PerSecond, GameUtil.MetricMassFormat.UseThreshold, true, "{0:0.#}");
+                string formattedMass = GameUtil.GetFormattedMass(
+                    mass: elementConverter.consumedElements[0].massConsumptionRate, timeSlice: GameUtil.TimeSlice.PerSecond,
+                    massFormat: GameUtil.MetricMassFormat.UseThreshold, includeSuffix: true, floatFormat: "{0:0.#}");
+
                 str = string.Format(str, elementName, formattedMass);
                 return str;
             }
@@ -52,15 +55,15 @@ namespace InteriorDecoration.Buildings.Lantern
                         smi => !smi.master.operational.IsFunctional)
                     .Enter("Waiting", smi => smi.master.operational.SetFlag(requiresFuelFlag, false))
                     .ToggleStatusItem(
-                        BUILDING.STATUSITEMS.AWAITINGFUEL.NAME,
-                        BUILDING.STATUSITEMS.AWAITINGFUEL.TOOLTIP,
-                        string.Empty,
-                        StatusItem.IconType.Exclamation,
-                        NotificationType.BadMinor,
-                        false,
-                        new HashedString(),
-                        129022,
-                        AwaitingFuelResolveString, null, null)
+                        name: BUILDING.STATUSITEMS.AWAITINGFUEL.NAME,
+                        tooltip: BUILDING.STATUSITEMS.AWAITINGFUEL.TOOLTIP,
+                        icon: string.Empty,
+                        icon_type: StatusItem.IconType.Exclamation,
+                        notification_type: NotificationType.BadMinor,
+                        allow_multiples: false,
+                        render_overlay: new HashedString(),
+                        status_overlays: 129022,
+                        resolve_string_callback: AwaitingFuelResolveString, resolve_tooltip_callback: null, category: null)
                     .EventTransition(
                         GameHashes.OnStorageChange,
                         on,

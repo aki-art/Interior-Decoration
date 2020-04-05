@@ -31,7 +31,5 @@ namespace InteriorDecoration.Buildings.StainedGlassTiles
             base.DoPostConfigureUnderConstruction(go);
             go.AddOrGet<KAnimGridTileVisualizer>();
         }
-
-
     }
 }
